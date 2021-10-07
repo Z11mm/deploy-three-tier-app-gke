@@ -7,14 +7,15 @@ import Logo from "./components/logo/Logo";
 import ImageInputForm from "./components/image-input-form/ImageInputForm";
 import Rank from "./components/rank/Rank";
 import FacialRecognition from "./components/facial-recognition/FaceRecognition";
+
 import "./App.css";
 
 const initialState = {
   input: "",
   imageUrl: "",
   box: {},
-  route: "signin",
-  isSignedIn: false,
+  route: "home",
+  isSignedIn: true,
   user: {
     id: "",
     name: "",
@@ -102,7 +103,7 @@ class App extends Component {
 
   handleRouteChange = (route) => {
     if (route === "signout") {
-      this.setState(initialState);
+      return this.setState(initialState);
     } else if (route === "home") {
       this.setState({ isSignedIn: true });
     }

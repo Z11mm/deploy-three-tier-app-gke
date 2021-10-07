@@ -1,15 +1,11 @@
 import React from 'react';
+import ProfileIcon from '../profile/ProfileIcon';
 
 const Navigation = ({ onRouteChange, isSignedIn }) => {
   if (isSignedIn) {
     return (
       <nav style={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <p
-          onClick={() => onRouteChange('signout')}
-          className='f4 link dim gray underline pa3 pb0 pointer'
-        >
-          Sign Out
-        </p>
+        <ProfileIcon onRouteChange={onRouteChange} />
       </nav>
     );
   } else {
