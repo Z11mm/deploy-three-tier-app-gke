@@ -15,7 +15,7 @@ import "./App.css";
 const initialState = {
   input: "",
   imageUrl: "",
-  box: {},
+  boxes: [],
   route: "home",
   isSignedIn: true,
   isProfileOpen: false,
@@ -48,21 +48,25 @@ class App extends Component {
     }));
   };
 
-  calculateFaceRegion = (data) => {
-    const faceRegion = data.outputs[0].data.regions[0].region_info.bounding_box;
-    const image = document.querySelector("#inputimage");
-    const width = Number(image.width);
-    const height = Number(image.height);
-    return {
-      topRow: faceRegion.top_row * height,
-      leftCol: faceRegion.left_col * width,
-      bottomRow: height - faceRegion.bottom_row * height,
-      rightCol: width - faceRegion.right_col * width,
-    };
+  calculateFaceRegions = (data) => {
+    return data.outputs[0].data.regions.map(face => {
+      const faceRegion = face.region_info.bounding_box;
+
+      const image = document.querySelector("#inputimage");
+      const width = Number(image.width);
+      const height = Number(image.height);
+      return {
+        topRow: faceRegion.top_row * height,
+        leftCol: faceRegion.left_col * width,
+        bottomRow: height - faceRegion.bottom_row * height,
+        rightCol: width - faceRegion.right_col * width,
+      };
+    });
+    
   };
 
-  setBoundingBox = (box) => {
-    this.setState({ box });
+  setBoundingBoxes = (boxes) => {
+    this.setState({ boxes });
   };
 
   handleInputChange = (e) => {
@@ -99,7 +103,7 @@ class App extends Component {
             })
             .catch((err) => console.log(err));
         }
-        this.setBoundingBox(this.calculateFaceRegion(response));
+        this.setBoundingBoxes(this.calculateFaceRegions(response));
       })
       .catch((err) => console.log(err));
   };
@@ -122,7 +126,7 @@ class App extends Component {
   };
 
   render() {
-    const { isSignedIn, route, box, imageUrl, isProfileOpen } = this.state;
+    const { isSignedIn, route, boxes, imageUrl, isProfileOpen } = this.state;
     return (
       <div>
         <Navigation
@@ -147,7 +151,7 @@ class App extends Component {
               onInputChange={this.handleInputChange}
               onButtonSubmit={this.handleImageSubmit}
             />
-            <FacialRecognition boundingBox={box} imageUrl={imageUrl} />
+            <FacialRecognition boundingBoxes={boxes} imageUrl={imageUrl} />
           </Fragment>
         ) : route === "signin" ? (
           <SignIn
