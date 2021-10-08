@@ -7,6 +7,7 @@ import Logo from "./components/logo/Logo";
 import ImageInputForm from "./components/image-input-form/ImageInputForm";
 import Rank from "./components/rank/Rank";
 import FacialRecognition from "./components/facial-recognition/FaceRecognition";
+import ProfileModal from "./components/modal/ProfileModal"
 
 import "./App.css";
 
@@ -22,7 +23,7 @@ const initialState = {
     email: "",
     entries: 0,
     joined: "",
-  },
+  }
 };
 
 class App extends Component {
@@ -40,7 +41,7 @@ class App extends Component {
         name: data.name,
         email: data.email,
         entries: data.entries,
-        joined: data.joined,
+        joined: data.joined
       },
     }));
   };
@@ -122,6 +123,7 @@ class App extends Component {
         {route === "home" ? (
           <Fragment>
             <Logo />
+            <ProfileModal>{'hello'}</ProfileModal>
             <Rank
               name={this.state.user.name}
               entries={this.state.user.entries}
