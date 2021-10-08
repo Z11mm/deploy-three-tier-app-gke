@@ -7,7 +7,8 @@ import Logo from "./components/logo/Logo";
 import ImageInputForm from "./components/image-input-form/ImageInputForm";
 import Rank from "./components/rank/Rank";
 import FacialRecognition from "./components/facial-recognition/FaceRecognition";
-import ProfileModal from "./components/modal/ProfileModal"
+import ProfileModal from "./components/modal/ProfileModal";
+import Profile from "./components/profile/Profile";
 
 import "./App.css";
 
@@ -17,13 +18,14 @@ const initialState = {
   box: {},
   route: "home",
   isSignedIn: true,
+  isProfileOpen: false,
   user: {
     id: "",
     name: "",
     email: "",
     entries: 0,
     joined: "",
-  }
+  },
 };
 
 class App extends Component {
@@ -41,7 +43,7 @@ class App extends Component {
         name: data.name,
         email: data.email,
         entries: data.entries,
-        joined: data.joined
+        joined: data.joined,
       },
     }));
   };
@@ -111,19 +113,32 @@ class App extends Component {
     this.setState({ route: route });
   };
 
+  // Turn profile modal on or off
+  toggleProfileModal = () => {
+    this.setState((prevState) => ({
+      ...prevState,
+      isProfileOpen: !prevState.isProfileOpen,
+    }));
+  };
+
   render() {
-    const { isSignedIn, route, box, imageUrl } = this.state;
+    const { isSignedIn, route, box, imageUrl, isProfileOpen } = this.state;
     return (
       <div>
         <Navigation
           isSignedIn={isSignedIn}
           onRouteChange={this.handleRouteChange}
+          toggleProfileModal={this.toggleProfileModal}
         />
+        {isProfileOpen ? (
+          <ProfileModal>
+            <Profile isProfileOpen={isProfileOpen} toggleProfileModal={this.toggleProfileModal} />
+          </ProfileModal>
+        ) : null}
 
         {route === "home" ? (
           <Fragment>
             <Logo />
-            <ProfileModal>{'hello'}</ProfileModal>
             <Rank
               name={this.state.user.name}
               entries={this.state.user.entries}
