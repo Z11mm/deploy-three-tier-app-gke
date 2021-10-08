@@ -2,7 +2,7 @@ import React from 'react';
 
 import './FacialRecognition.css';
 
-const FacialRecognition = ({ imageUrl, boundingBox }) => {
+const FacialRecognition = ({ imageUrl, boundingBoxes }) => {
   return (
     <div className='center ma'>
       <div className='absolute mt4'>
@@ -13,15 +13,19 @@ const FacialRecognition = ({ imageUrl, boundingBox }) => {
           width='500px'
           height='auto'
         />
-        <div
-          className='bounding-box'
-          style={{
-            top: boundingBox.topRow,
-            left: boundingBox.leftCol,
-            bottom: boundingBox.bottomRow,
-            right: boundingBox.rightCol
-          }}
-        ></div>
+        {boundingBoxes.map(box => {
+          return (<div
+            key={box.topRow}
+            className="bounding-box"
+            style={{
+              top: box.topRow,
+              left: box.leftCol,
+              bottom: box.bottomRow,
+              right: box.rightCol,
+            }}
+          ></div>);
+        })
+          }
       </div>
     </div>
   );
