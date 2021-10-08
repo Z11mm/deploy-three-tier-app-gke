@@ -18,6 +18,7 @@ const initialState = {
   boxes: [],
   route: "home",
   isSignedIn: true,
+
   isProfileOpen: false,
   user: {
     id: "",
@@ -94,16 +95,16 @@ class App extends Component {
             method: "put",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-              id: this.state.user.id,
+              id: this.state.user.id, // add box.length state here
             }),
           })
             .then((response) => response.json())
             .then((count) => {
-              this.setState(Object.assign(this.state.user, { entries: count }));
+              this.setState(Object.assign(this.state.user, { entries: count })); //update entries with box count
             })
             .catch((err) => console.log(err));
         }
-        this.setBoundingBoxes(this.calculateFaceRegions(response));
+        this.setBoundingBoxes(this.calculateFaceRegions(response)); //mv to line 89,before fetch
       })
       .catch((err) => console.log(err));
   };
