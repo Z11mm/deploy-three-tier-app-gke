@@ -16,9 +16,8 @@ const initialState = {
   input: "",
   imageUrl: "",
   boxes: [],
-  route: "home",
-  isSignedIn: true,
-
+  route: "signin",
+  isSignedIn: false,
   isProfileOpen: false,
   user: {
     id: "",
@@ -59,11 +58,10 @@ class App extends Component {
       return {
         topRow: faceRegion.top_row * height,
         leftCol: faceRegion.left_col * width,
-        bottomRow: height - faceRegion.bottom_row * height,
-        rightCol: width - faceRegion.right_col * width,
+        bottomRow: height - (faceRegion.bottom_row * height),
+        rightCol: width - (faceRegion.right_col * width)
       };
-    });
-    
+    });   
   };
 
   setBoundingBoxes = (boxes) => {
@@ -128,6 +126,7 @@ class App extends Component {
 
   render() {
     const { isSignedIn, route, boxes, imageUrl, isProfileOpen } = this.state;
+    console.log(boxes)
     return (
       <div>
         <Navigation
