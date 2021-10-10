@@ -17,7 +17,7 @@ const initialState = {
   imageUrl: "",
   boxes: [],
   route: "signin",
-  isSignedIn: false,
+  isSignedIn: true,
   isProfileOpen: false,
   user: {
     id: "",
@@ -25,6 +25,8 @@ const initialState = {
     email: "",
     entries: 0,
     joined: "",
+    department: "",
+    title: "",
   },
 };
 
@@ -49,7 +51,7 @@ class App extends Component {
   };
 
   calculateFaceRegions = (data) => {
-    return data.outputs[0].data.regions.map(face => {
+    return data.outputs[0].data.regions.map((face) => {
       const faceRegion = face.region_info.bounding_box;
 
       const image = document.querySelector("#inputimage");
@@ -58,10 +60,10 @@ class App extends Component {
       return {
         topRow: faceRegion.top_row * height,
         leftCol: faceRegion.left_col * width,
-        bottomRow: height - (faceRegion.bottom_row * height),
-        rightCol: width - (faceRegion.right_col * width)
+        bottomRow: height - faceRegion.bottom_row * height,
+        rightCol: width - faceRegion.right_col * width,
       };
-    });   
+    });
   };
 
   setBoundingBoxes = (boxes) => {
@@ -93,7 +95,7 @@ class App extends Component {
             method: "put",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-              id: this.state.user.id, // add box.length state here
+              id: this.state.user.id,
             }),
           })
             .then((response) => response.json())
@@ -125,8 +127,8 @@ class App extends Component {
   };
 
   render() {
-    const { isSignedIn, route, boxes, imageUrl, isProfileOpen } = this.state;
-    console.log(boxes)
+    const { isSignedIn, route, boxes, imageUrl, isProfileOpen, user } =
+      this.state;
     return (
       <div>
         <Navigation
@@ -136,17 +138,20 @@ class App extends Component {
         />
         {isProfileOpen ? (
           <ProfileModal>
-            <Profile isProfileOpen={isProfileOpen} toggleProfileModal={this.toggleProfileModal} />
+            <Profile
+              isProfileOpen={isProfileOpen}
+              toggleProfileModal={this.toggleProfileModal}
+              createUser={this.createUser}
+              user={user}
+              boxes={boxes}
+            />
           </ProfileModal>
         ) : null}
 
         {route === "home" ? (
           <Fragment>
             <Logo />
-            <Rank
-              name={this.state.user.name}
-              entries={this.state.user.entries}
-            />
+            <Rank name={this.state.user.name} boxes={this.state.boxes} />
             <ImageInputForm
               onInputChange={this.handleInputChange}
               onButtonSubmit={this.handleImageSubmit}

@@ -35,7 +35,8 @@ const ProfileIcon = ({ onRouteChange, toggleProfileModal }) => {
             backgroundColor: "rgba(255, 255, 255, 0.5",
           }}
         >
-          <DropdownItem onClick={() => toggleProfileModal()}>Save Attendance</DropdownItem>
+          <DropdownItem>Save Attendance</DropdownItem>
+          <DropdownItem onClick={() => toggleProfileModal()}>Update Profile</DropdownItem>
           <DropdownItem onClick={() => onRouteChange("signout")}>
             Sign Out
           </DropdownItem>
