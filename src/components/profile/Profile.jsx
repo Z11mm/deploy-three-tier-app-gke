@@ -37,14 +37,14 @@ class Profile extends Component {
       body: JSON.stringify({ formInput: data }),
     })
       .then((resp) => {
-        this.props.toggleProfileModal();
+        this.props.toggleModal();
         this.props.createUser({ ...this.props.user, ...data });
       })
       .catch((err) => console.log(err));
   };
 
   render() {
-    const { user, boxes } = this.props;
+    const { user } = this.props;
     const { name, department, title } = this.state;
     return (
       <div className="profile-modal">
@@ -56,7 +56,6 @@ class Profile extends Component {
               alt="avatar"
             />
             <h2>{this.state.name}</h2>
-            <h4>{`Attendance count: ${boxes.length}`}</h4>
             <h4>{`Member since: ${new Date(
               user.joined
             ).toLocaleDateString()}`}</h4>
@@ -72,7 +71,7 @@ class Profile extends Component {
               name="username"
               id="username"
             />
-            <label className="mt2 fw6" htmlFor="event">
+            <label className="mt2 fw6" htmlFor="department">
               Department:
             </label>
             <input
@@ -83,7 +82,7 @@ class Profile extends Component {
               name="department"
               id="department"
             />
-            <label className="mt2 fw6" htmlFor="people">
+            <label className="mt2 fw6" htmlFor="title">
               Title:
             </label>
             <input
@@ -106,13 +105,13 @@ class Profile extends Component {
               </button>
               <button
                 className="b pa2 grow pointer hover-white w-40 bg-light-red b--black-20"
-                onClick={this.props.toggleProfileModal}
+                onClick={this.props.toggleModal}
               >
                 Cancel
               </button>
             </div>
           </div>
-          <div className="modal-close" onClick={this.props.toggleProfileModal}>
+          <div className="modal-close" onClick={this.props.toggleModal}>
             &times;
           </div>
         </article>

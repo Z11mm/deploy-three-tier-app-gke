@@ -8,7 +8,9 @@ import ImageInputForm from "./components/image-input-form/ImageInputForm";
 import Rank from "./components/rank/Rank";
 import FacialRecognition from "./components/facial-recognition/FaceRecognition";
 import ProfileModal from "./components/modal/ProfileModal";
+import AttendanceModal from "./components/modal/AttendanceModal";
 import Profile from "./components/profile/Profile";
+import Attendance from "./components/attendance/Attendance";
 
 import "./App.css";
 
@@ -17,8 +19,9 @@ const initialState = {
   imageUrl: "",
   boxes: [],
   route: "signin",
-  isSignedIn: true,
+  isSignedIn: false,
   isProfileOpen: false,
+  isAttendanceOpen: false,
   user: {
     id: "",
     name: "",
@@ -27,6 +30,11 @@ const initialState = {
     joined: "",
     department: "",
     title: "",
+  },
+  meeting: {
+    event_name: "",
+    location: "",
+    no_of_people: "",
   },
 };
 
@@ -46,6 +54,17 @@ class App extends Component {
         email: data.email,
         entries: data.entries,
         joined: data.joined,
+      },
+    }));
+  };
+
+  createMeeting = (data) => {
+    this.setState((prevState) => ({
+      meeting: {
+        ...prevState.user,
+        event_name: data.event_name,
+        location: data.location,
+        no_of_people: data.no_of_people,
       },
     }));
   };
@@ -100,11 +119,11 @@ class App extends Component {
           })
             .then((response) => response.json())
             .then((count) => {
-              this.setState(Object.assign(this.state.user, { entries: count })); //update entries with box count
+              this.setState(Object.assign(this.state.user, { entries: count }));
             })
             .catch((err) => console.log(err));
         }
-        this.setBoundingBoxes(this.calculateFaceRegions(response)); //mv to line 89,before fetch
+        this.setBoundingBoxes(this.calculateFaceRegions(response));
       })
       .catch((err) => console.log(err));
   };
@@ -119,33 +138,71 @@ class App extends Component {
   };
 
   // Turn profile modal on or off
-  toggleProfileModal = () => {
+  toggleModal = () => {
     this.setState((prevState) => ({
       ...prevState,
       isProfileOpen: !prevState.isProfileOpen,
     }));
   };
 
+  // Turn attendance modal on or off
+  toggleAttendanceModal = () => {
+    this.setState((prevState) => ({
+      ...prevState,
+      isAttendanceOpen: !prevState.isAttendanceOpen,
+    }));
+  };
+
   render() {
-    const { isSignedIn, route, boxes, imageUrl, isProfileOpen, user } =
-      this.state;
+    const {
+      isSignedIn,
+      route,
+      boxes,
+      imageUrl,
+      isProfileOpen,
+      isAttendanceOpen,
+      user,
+      meeting,
+    } = this.state;
     return (
       <div>
         <Navigation
           isSignedIn={isSignedIn}
           onRouteChange={this.handleRouteChange}
-          toggleProfileModal={this.toggleProfileModal}
+          toggleModal={this.toggleModal}
+          toggleAttendanceModal={this.toggleAttendanceModal}
         />
         {isProfileOpen ? (
           <ProfileModal>
             <Profile
               isProfileOpen={isProfileOpen}
-              toggleProfileModal={this.toggleProfileModal}
+              toggleModal={this.toggleModal}
               createUser={this.createUser}
               user={user}
+            />
+            {/* <Attendance
+              isProfileOpen={isProfileOpen}
+              toggleModal={this.toggleModal}
+              createMeeting={this.createMeeting}
+              user={user}
+              meeting={meeting}
+              boxes={boxes}
+            /> */}
+          </ProfileModal>
+        ) : null}
+
+        {isAttendanceOpen ? (
+          <AttendanceModal>
+            <Attendance
+              isAttendanceOpen={isAttendanceOpen}
+              toggleModal={this.toggleModal}
+              toggleAttendanceModal={this.toggleAttendanceModal}
+              createMeeting={this.createMeeting}
+              user={user}
+              meeting={meeting}
               boxes={boxes}
             />
-          </ProfileModal>
+          </AttendanceModal>
         ) : null}
 
         {route === "home" ? (
