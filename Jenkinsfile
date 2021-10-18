@@ -11,7 +11,7 @@ pipeline {
             rm -rf *.tar.gz
             npm install
             npm run build
-            tar czf react-build.tar.gz /build
+            // tar czf react-build.tar.gz /build
             '''
             echo 'Build complete'
         }
