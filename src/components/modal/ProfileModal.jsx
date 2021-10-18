@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import ReactDOM from 'react-dom';
-import './ProfileModal.css';
+import './Modal.css';
 
 const profileModal = document.getElementById('profile-modal');
 

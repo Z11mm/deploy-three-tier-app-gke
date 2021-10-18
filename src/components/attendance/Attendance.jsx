@@ -1,26 +1,26 @@
 import React, { Component } from "react";
-import "./Profile.css";
+import "./Attendance.css";
 
-class Profile extends Component {
+class Attendance extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: this.props.user.name,
-      department: this.props.user.department,
-      title: this.props.user.title,
+      event_name: "",
+      location: "",
+      no_of_people: "",
     };
   }
 
   onFormChange = (event) => {
     switch (event.target.name) {
-      case "username":
-        this.setState({ name: event.target.value });
+      case "event_name":
+        this.setState({ event_name: event.target.value });
         break;
-      case "department":
-        this.setState({ department: event.target.value });
+      case "location":
+        this.setState({ location: event.target.value });
         break;
-      case "title":
-        this.setState({ title: event.target.value });
+      case "no_of_people":
+        this.setState({ no_of_people: event.target.value });
         break;
       default:
         return;
@@ -28,8 +28,8 @@ class Profile extends Component {
   };
 
   // Update user profile
-  onProfileUpdate = (data) => {
-    fetch(`http://localhost:3000/profile/${this.props.user.id}`, {
+  onAttendanceUpdate = (data) => {
+    fetch(`http://localhost:3000/profile/${this.props.user.id}/meeting`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -37,15 +37,15 @@ class Profile extends Component {
       body: JSON.stringify({ formInput: data }),
     })
       .then((resp) => {
-        this.props.toggleModal();
-        this.props.createUser({ ...this.props.user, ...data });
+        this.props.toggleAttendanceModal();
+        this.props.createMeeting({ ...this.props.meeting, ...data });
       })
       .catch((err) => console.log(err));
   };
 
   render() {
-    const { user } = this.props;
-    const { name, department, title } = this.state;
+    const { user, boxes } = this.props;
+    const { event_name, location, no_of_people } = this.state;
     return (
       <div className="profile-modal">
         <article className="pa4 black-80 br2 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 center shadow-5 bg-white">
@@ -55,63 +55,71 @@ class Profile extends Component {
               className="h3 w3 dib"
               alt="avatar"
             />
-            <h2>{this.state.name}</h2>
-            <h4>{`Member since: ${new Date(
-              user.joined
-            ).toLocaleDateString()}`}</h4>
+            <h2>{this.props.user.name}</h2>
+            <h4>{`Attendance count: ${boxes.length}`}</h4>
             <hr />
-            <label className="mt2 fw6" htmlFor="username">
-              Name:
+
+            <label className="mt2 fw6" htmlFor="event_name">
+              Event Name:
             </label>
             <input
               onChange={this.onFormChange}
               className="pa2 ba w-100"
-              placeholder="Username"
+              placeholder="Event Name"
               type="text"
-              name="username"
-              id="username"
+              name="event_name"
+              id="event_name"
             />
-            <label className="mt2 fw6" htmlFor="department">
-              Department:
+            <label className="mt2 fw6" htmlFor="location">
+              Location:
             </label>
             <input
               onChange={this.onFormChange}
               className="pa2 ba w-100"
-              placeholder="Department"
+              placeholder="Location"
               type="text"
-              name="department"
-              id="department"
+              name="location"
+              id="location"
             />
-            <label className="mt2 fw6" htmlFor="title">
-              Title:
+            <label className="mt2 fw6" htmlFor="attendance">
+              Number of people:
             </label>
             <input
               onChange={this.onFormChange}
               className="pa2 ba w-100"
-              placeholder="Title"
+              placeholder="Number of people"
               type="text"
-              name="title"
-              id="title"
+              name="no_of_people"
+              id="no_of_people"
             />
             <div
               className="mt4"
               style={{ display: "flex", justifyContent: "space-evenly" }}
             >
               <button
-                onClick={() => this.onProfileUpdate({ name, department, title })}
+                onClick={() =>
+                  this.onAttendanceUpdate({
+                    event_name,
+                    location,
+                    no_of_people,
+                  })
+                }
                 className="b pa2 grow pointer hover-white w-40 bg-light-blue b--black-20"
               >
                 Save
               </button>
               <button
                 className="b pa2 grow pointer hover-white w-40 bg-light-red b--black-20"
-                onClick={this.props.toggleModal}
+                onClick={this.props.toggleAttendanceModal}
               >
                 Cancel
               </button>
             </div>
           </div>
-          <div className="modal-close" onClick={this.props.toggleModal}>
+          <div
+            className="modal-close"
+            onClick={this.props.toggleAttendanceModal}
+          >
             &times;
           </div>
         </article>
@@ -120,4 +128,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+export default Attendance;
