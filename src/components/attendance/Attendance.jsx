@@ -5,9 +5,9 @@ class Attendance extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        event_name: "",
-        location: '',
-        no_of_people: ''
+      event_name: "",
+      location: "",
+      no_of_people: "",
     };
   }
 
@@ -58,7 +58,7 @@ class Attendance extends Component {
             <h2>{this.props.user.name}</h2>
             <h4>{`Attendance count: ${boxes.length}`}</h4>
             <hr />
-                    
+
             <label className="mt2 fw6" htmlFor="event_name">
               Event Name:
             </label>
@@ -98,7 +98,11 @@ class Attendance extends Component {
             >
               <button
                 onClick={() =>
-                  this.onAttendanceUpdate({ event_name, location, no_of_people })
+                  this.onAttendanceUpdate({
+                    event_name,
+                    location,
+                    no_of_people,
+                  })
                 }
                 className="b pa2 grow pointer hover-white w-40 bg-light-blue b--black-20"
               >
@@ -112,7 +116,10 @@ class Attendance extends Component {
               </button>
             </div>
           </div>
-          <div className="modal-close" onClick={this.props.toggleAttendanceModal}>
+          <div
+            className="modal-close"
+            onClick={this.props.toggleAttendanceModal}
+          >
             &times;
           </div>
         </article>
