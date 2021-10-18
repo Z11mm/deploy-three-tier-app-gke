@@ -44,7 +44,7 @@ class Attendance extends Component {
   };
 
   render() {
-    const { user, boxes } = this.props;
+    const { boxes } = this.props;
     const { event_name, location, no_of_people } = this.state;
     return (
       <div className="profile-modal">

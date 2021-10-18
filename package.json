@@ -18,8 +18,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "format": "prettier --write src/components/*.jsx"
+    "test": "react-scripts test"
   },
   "eslintConfig": {
     "extends": [
