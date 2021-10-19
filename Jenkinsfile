@@ -8,7 +8,7 @@ pipeline {
       steps {
         echo 'Building application'
         sh '''
-        npm install
+        npm ci
         npm run build
 
         '''
