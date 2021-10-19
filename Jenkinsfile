@@ -21,7 +21,7 @@ pipeline {
         // npm run build
         // tar czf react-build.tar.gz /build
         // '''
-        echo 'Build complete'
+        echo 'complete'
       }
     }
   }
