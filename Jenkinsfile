@@ -4,7 +4,7 @@ pipeline {
 
   stages {
 
-    stage('Build') {
+    stage('Build application') {
       steps {
         echo 'Building application'
         sh '''
@@ -13,6 +13,32 @@ pipeline {
 
         '''
         echo 'complete'
+      }
+    }
+
+    stage('Test application') {
+      steps {
+        echo 'Testing application'
+      }
+    }
+
+    stage('Build Docker image') {
+      steps {
+        echo 'Building Docker image'
+        script {
+          image = docker.build('masterziii/sca-project-frontend:${env.BUILD_NUMBER}')
+        }
+      }
+    }
+    stage('Push Docker image to DockerHub') {
+      steps {
+        echo 'Pushing Docker image'
+        script {
+          withCredentials([string(credentialsId: 'DockerHub', variable: 'DockerHub')]) {
+            sh 'docker login -u masterziii -p $(DockerHub)'
+          }
+          image.push('${env.BUILD_NUMBER}')
+        }
       }
     }
   }

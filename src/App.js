@@ -180,14 +180,6 @@ class App extends Component {
               createUser={this.createUser}
               user={user}
             />
-            {/* <Attendance
-              isProfileOpen={isProfileOpen}
-              toggleModal={this.toggleModal}
-              createMeeting={this.createMeeting}
-              user={user}
-              meeting={meeting}
-              boxes={boxes}
-            /> */}
           </ProfileModal>
         ) : null}
 
