@@ -26,7 +26,7 @@ pipeline {
       steps {
         echo 'Building Docker image'
         script {
-          image = docker.build('masterziii/sca-project-frontend:${env.BUILD_NUMBER}')
+          image = docker.build("masterziii/sca-project-frontend:${env.BUILD_NUMBER}")
         }
       }
     }
@@ -37,7 +37,7 @@ pipeline {
           withCredentials([string(credentialsId: 'DockerHub', variable: 'DockerHub')]) {
             sh 'docker login -u masterziii -p $(DockerHub)'
           }
-          image.push('${env.BUILD_NUMBER}')
+          image.push("${env.BUILD_NUMBER}")
         }
       }
     }
