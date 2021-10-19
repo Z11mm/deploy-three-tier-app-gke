@@ -32,7 +32,7 @@ pipeline {
     }
     stage('Push Docker image to DockerHub') {
       steps {
-        echo 'Pushing Docker image'
+        echo 'Pushing Docker image to DockerHub'
         script {
           withCredentials([string(credentialsId: 'DockerHub', variable: 'DockerHub')]) {
             sh 'docker login -u masterziii -p $(DockerHub)'
