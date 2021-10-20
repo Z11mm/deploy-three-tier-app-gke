@@ -16,7 +16,7 @@ pipeline {
         echo 'Building image'
         sh '''
         docker-compose --version
-        docker-compose -f docker-compose-prod.yml -t "masterziii/sca-project-frontend:${env.BUILD_NUMBER}" build
+        docker-compose -f docker-compose-prod.yml build
         '''
         echo 'complete'
       }
