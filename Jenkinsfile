@@ -2,6 +2,13 @@ pipeline {
   agent any
   tools {nodejs "Node"}
 
+  environment {
+    PROJECT_ID = "sca-cloud-school-c2"
+    CLUSTER_NAME = "sca-project-cluster"
+    LOCATION = "us-central1-c"
+    CREDENTIALS_ID = "kubernetes"
+  }
+
   stages {
 
     stage('Start build notification') {
@@ -28,14 +35,6 @@ pipeline {
       }
     }
 
-    // stage('Build Docker image') {
-    //   steps {
-    //     echo 'Building Docker image'
-    //     script {
-    //       image = docker.build("masterziii/sca-project-frontend:${env.BUILD_NUMBER}")
-    //     }
-    //   }
-    // }
     stage('Push Docker image to DockerHub') {
       steps {
         echo 'Pushing Docker image to DockerHub'
@@ -47,6 +46,13 @@ pipeline {
             '''
           }
         }
+      }
+    }
+    stage('Deploy to GKE') {
+      steps {
+        echo 'Deploying to GKE'
+        sh 'ls -ltr'
+      
       }
     }
   }
