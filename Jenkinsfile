@@ -44,7 +44,7 @@ pipeline {
             sh '''
             docker login -u masterziii -p ${DockerHub}
             docker-compose -f docker-compose-prod.yml build
-            docker-compose push
+            docker-compose push app
             '''
           }
         }
