@@ -11,12 +11,11 @@ pipeline {
       }
     }
 
-    stage('Build application') {
+    stage('Build Docker image') {
       steps {
-        echo 'Building application'
+        echo 'Building image'
         sh '''
-        npm ci
-        npm run build
+        docker-compose --version
 
         '''
         echo 'complete'
@@ -29,25 +28,25 @@ pipeline {
       }
     }
 
-    stage('Build Docker image') {
-      steps {
-        echo 'Building Docker image'
-        script {
-          image = docker.build("masterziii/sca-project-frontend:${env.BUILD_NUMBER}")
-        }
-      }
-    }
-    stage('Push Docker image to DockerHub') {
-      steps {
-        echo 'Pushing Docker image to DockerHub'
-        script {
-          withCredentials([string(credentialsId: 'DockerHub', variable: 'DockerHub')]) {
-            sh 'docker login -u masterziii -p ${DockerHub}'
-          }
-          image.push("${env.BUILD_NUMBER}")
-        }
-      }
-    }
+    // stage('Build Docker image') {
+    //   steps {
+    //     echo 'Building Docker image'
+    //     script {
+    //       image = docker.build("masterziii/sca-project-frontend:${env.BUILD_NUMBER}")
+    //     }
+    //   }
+    // }
+    // stage('Push Docker image to DockerHub') {
+    //   steps {
+    //     echo 'Pushing Docker image to DockerHub'
+    //     script {
+    //       withCredentials([string(credentialsId: 'DockerHub', variable: 'DockerHub')]) {
+    //         sh 'docker login -u masterziii -p ${DockerHub}'
+    //       }
+    //       image.push("${env.BUILD_NUMBER}")
+    //     }
+    //   }
+    // }
   }
   post {
     success {
