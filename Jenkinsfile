@@ -11,19 +11,16 @@ pipeline {
       }
     }
 
-    stage('Build Docker image') {
-      steps {
-        echo 'Building image'
-        script {
-          image = docker-compose.build("masterziii/sca-project-backend:${env.BUILD_NUMBER}")
-        }
-        // sh '''
-        // docker-compose -f docker-compose-prod.yml build
-        // docker image ls
-        // '''
-        // echo 'complete'
-      }
-    }
+    // stage('Build Docker image') {
+    //   steps {
+    //     echo 'Building image'
+    //     sh '''
+    //     docker-compose -f docker-compose-prod.yml build
+    //     docker image ls
+    //     '''
+    //     echo 'complete'
+    //   }
+    // }
 
     stage('Test application') {
       steps {
@@ -46,6 +43,7 @@ pipeline {
           withCredentials([string(credentialsId: 'DockerHub', variable: 'DockerHub')]) {
             sh '''
             docker login -u masterziii -p ${DockerHub}
+            docker-compose -f docker-compose-prod.yml build
             docker-compose push
             '''
           }
