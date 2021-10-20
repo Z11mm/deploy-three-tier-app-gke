@@ -15,7 +15,6 @@ pipeline {
       steps {
         echo 'Building image'
         sh '''
-        docker rmi $(docker image ls)
         docker-compose -f docker-compose-prod.yml build
         docker image ls
         '''
