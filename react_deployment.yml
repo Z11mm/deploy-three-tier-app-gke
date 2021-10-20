@@ -34,4 +34,4 @@ spec:
         - name: faceapp-frontend
           image: masterziii/sca-project-frontend:latest
           ports:
-            containerPort: 80
+          - containerPort: 80
