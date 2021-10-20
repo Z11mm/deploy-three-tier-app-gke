@@ -41,9 +41,11 @@ pipeline {
         echo 'Pushing Docker image to DockerHub'
         script {
           withCredentials([string(credentialsId: 'DockerHub', variable: 'DockerHub')]) {
-            sh 'docker login -u masterziii -p ${DockerHub}'
+            sh '''
+            docker login -u masterziii -p ${DockerHub}
+            docker-compose push
+            '''
           }
-          docker-compose push app
         }
       }
     }
