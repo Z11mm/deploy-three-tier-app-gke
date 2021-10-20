@@ -17,6 +17,7 @@ pipeline {
         sh '''
         docker-compose --version
         docker-compose -f docker-compose-prod.yml build
+        docker image ls
         '''
         echo 'complete'
       }
