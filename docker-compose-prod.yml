@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   app:
-    image: sca-project-frontend:latest
+    image: masterziii/sca-project-frontend:latest
     build: 
       context: .
       dockerfile: Dockerfile.prod

@@ -36,17 +36,17 @@ pipeline {
     //     }
     //   }
     // }
-    // stage('Push Docker image to DockerHub') {
-    //   steps {
-    //     echo 'Pushing Docker image to DockerHub'
-    //     script {
-    //       withCredentials([string(credentialsId: 'DockerHub', variable: 'DockerHub')]) {
-    //         sh 'docker login -u masterziii -p ${DockerHub}'
-    //       }
-    //       image.push("${env.BUILD_NUMBER}")
-    //     }
-    //   }
-    // }
+    stage('Push Docker image to DockerHub') {
+      steps {
+        echo 'Pushing Docker image to DockerHub'
+        script {
+          withCredentials([string(credentialsId: 'DockerHub', variable: 'DockerHub')]) {
+            sh 'docker login -u masterziii -p ${DockerHub}'
+          }
+          docker-compose push app
+        }
+      }
+    }
   }
   post {
     success {
