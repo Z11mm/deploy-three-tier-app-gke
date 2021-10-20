@@ -52,6 +52,7 @@ pipeline {
       steps {
         echo 'Deploying to GKE'
         sh 'ls -ltr'
+        step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'react_deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
       
       }
     }
