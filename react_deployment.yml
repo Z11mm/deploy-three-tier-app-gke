@@ -29,9 +29,9 @@ spec:
     metadata: 
       labels: 
         app: faceapp-frontend
-      spec: 
-        containers:
-          - name: faceapp-frontend
-            image: masterziii/sca-project-frontend:latest
-            ports:
-              containerPort: 80
+    spec: 
+      containers:
+        - name: faceapp-frontend
+          image: masterziii/sca-project-frontend:latest
+          ports:
+            containerPort: 80
