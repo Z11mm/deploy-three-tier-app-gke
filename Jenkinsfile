@@ -14,11 +14,14 @@ pipeline {
     stage('Build Docker image') {
       steps {
         echo 'Building image'
-        sh '''
-        docker-compose -f docker-compose-prod.yml build
-        docker image ls
-        '''
-        echo 'complete'
+        script {
+          image = docker-compose.build("masterziii/sca-project-backend:${env.BUILD_NUMBER}")
+        }
+        // sh '''
+        // docker-compose -f docker-compose-prod.yml build
+        // docker image ls
+        // '''
+        // echo 'complete'
       }
     }
 
