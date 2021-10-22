@@ -18,6 +18,16 @@ pipeline {
       }
     }
 
+    stage('Build application') {
+      steps {
+        echo 'Building application'
+        sh '''
+        npm ci
+        npm run build
+        '''
+      }
+    }
+
     stage('Build Docker image') {
       steps {
         echo 'Building image'
@@ -33,7 +43,7 @@ pipeline {
         echo 'Testing application'
       }
     }
-    
+
     // stage('Push Docker image to DockerHub') {
     //   steps {
     //     echo 'Pushing Docker image to DockerHub'
