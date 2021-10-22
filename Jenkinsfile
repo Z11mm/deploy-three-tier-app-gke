@@ -33,6 +33,7 @@ pipeline {
         echo 'Testing application'
       }
     }
+    
     // stage('Push Docker image to DockerHub') {
     //   steps {
     //     echo 'Pushing Docker image to DockerHub'
