@@ -29,7 +29,7 @@ class Attendance extends Component {
 
   // Update user profile
   onAttendanceUpdate = (data) => {
-    fetch(`http://localhost:3000/profile/${this.props.user.id}/meeting`, {
+    fetch(`${this.props.apiUrl}/profile/${this.props.user.id}/meeting`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",

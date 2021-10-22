@@ -22,7 +22,7 @@ class SignIn extends Component {
   };
 
   handleSignInSubmit = () => {
-    fetch('http://localhost:3000/signin', {
+    fetch(`${this.props.apiUrl}/signin`, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

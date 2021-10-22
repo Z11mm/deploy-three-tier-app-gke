@@ -29,7 +29,7 @@ class Profile extends Component {
 
   // Update user profile
   onProfileUpdate = (data) => {
-    fetch(`http://localhost:3000/profile/${this.props.user.id}`, {
+    fetch(`${this.props.apiUrl}/profile/${this.props.user.id}`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
