@@ -35,4 +35,3 @@ spec:
           image: masterziii/sca-project-frontend:latest
           ports:
           - containerPort: 80
-          imagePullPolicy: Always
