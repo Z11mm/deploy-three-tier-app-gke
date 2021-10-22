@@ -101,7 +101,7 @@ class App extends Component {
       imageUrl: this.state.input,
     });
 
-    fetch(`${REACT_APP_API_URL}/imageurl`, {
+    fetch(`${REACT_APP_API_URL}imageurl`, {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
