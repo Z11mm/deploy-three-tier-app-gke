@@ -8,5 +8,5 @@ services:
       dockerfile: Dockerfile.prod
     ports:
       - "80:80"
-    volumes:
-      - ./src:/app/src
+    # volumes:
+    #   - ./src:/app/src
