@@ -26,6 +26,7 @@ class SignIn extends Component {
       method: "post",
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
       },
       body: JSON.stringify({
         email: this.state.signInEmail,
