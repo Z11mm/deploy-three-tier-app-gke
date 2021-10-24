@@ -157,7 +157,7 @@ class App extends Component {
   };
 
   render() {
-    const { apiUrl } = config;
+    const apiUrl = config.apiUrl;
     console.log(apiUrl);
     const {
       isSignedIn,
