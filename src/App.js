@@ -14,7 +14,7 @@ import Attendance from "./components/attendance/Attendance";
 
 import "./App.css";
 
-const config = require("./config");
+const config = require("../config");
 const apiUrl = config.apiUrl;
 // const { REACT_APP_API_URL } = process.env;
 const initialState = {
