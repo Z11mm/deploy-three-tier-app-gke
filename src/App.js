@@ -15,8 +15,8 @@ import Attendance from "./components/attendance/Attendance";
 import "./App.css";
 
 // const config = require("./config");
-const apiUrl = process.env.REACT_APP_API_URL;
-// const { REACT_APP_API_URL } = process.env;
+// const apiUrl = process.env.REACT_APP_API_URL;
+const { REACT_APP_API_URL } = process.env;
 const initialState = {
   input: "",
   imageUrl: "",
@@ -103,7 +103,7 @@ class App extends Component {
       imageUrl: this.state.input,
     });
 
-    fetch(`${apiUrl}/imageurl`, {
+    fetch(`${REACT_APP_API_URL}/imageurl`, {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -113,7 +113,7 @@ class App extends Component {
       .then((response) => response.json())
       .then((response) => {
         if (response) {
-          fetch(`${apiUrl}/image`, {
+          fetch(`${REACT_APP_API_URL}/image`, {
             method: "put",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -157,8 +157,8 @@ class App extends Component {
   };
 
   render() {
-    const apiUrl = process.env.REACT_APP_API_URL;
-    console.log(apiUrl);
+    // const apiUrl = process.env.REACT_APP_API_URL;
+    console.log(REACT_APP_API_URL);
     const {
       isSignedIn,
       route,
@@ -184,7 +184,7 @@ class App extends Component {
               toggleModal={this.toggleModal}
               createUser={this.createUser}
               user={user}
-              apiUrl={apiUrl}
+              apiUrl={REACT_APP_API_URL}
             />
           </ProfileModal>
         ) : null}
@@ -199,7 +199,7 @@ class App extends Component {
               user={user}
               meeting={meeting}
               boxes={boxes}
-              apiUrl={apiUrl}
+              apiUrl={REACT_APP_API_URL}
             />
           </AttendanceModal>
         ) : null}
@@ -218,13 +218,13 @@ class App extends Component {
           <SignIn
             createUser={this.createUser}
             onRouteChange={this.handleRouteChange}
-            apiUrl={apiUrl}
+            apiUrl={REACT_APP_API_URL}
           />
         ) : (
           <SignUp
             createUser={this.createUser}
             onRouteChange={this.handleRouteChange}
-            apiUrl={apiUrl}
+            apiUrl={REACT_APP_API_URL}
           />
         )}
       </div>
