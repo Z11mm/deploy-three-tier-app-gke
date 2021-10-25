@@ -1,7 +1,7 @@
 # Project: Deploy a Three-Tier application to The Cloud
 
 ## Introduction
-This application is a face-detection app based off of the AI/ML [Clarifai API](https://www.clarifai.com/models/ai-face-detection) that allows users to upload images of audiences in an event and record the audience count. 
+This application is a face-detection app based off of the AI/ML [Clarifai API](https://www.clarifai.com/models/ai-face-detection). The application allows users to upload images of audiences in an event and record the audience count. 
 
 ## Application Architecture
 The parts of the application are as follows:
@@ -34,6 +34,13 @@ The build is minified and the filenames include the hashes.
 Your app is ready to be deployed!
 
 ## Infrastructure Provisioning
+
+![Provision infrastructure in GCP using Terraform](/assets/images/infra-provision.png)
+Infrastructure for this project:
+* Google Compute Engine VM instances
+* Google Kubernetes Engine Cluster
+* Cloud SQL Instance for Postgres
+
 Provision infrastructure in GCP using Terraform. Check out the infrastructure-as-code configuration  
 for this project in this [repo](https://github.com/Z11mm/sca-project-c2-iac)
 
