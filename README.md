@@ -4,6 +4,8 @@
 This application is a face-detection app based off of the AI/ML [Clarifai API](https://www.clarifai.com/models/ai-face-detection). The application allows users to upload images of audiences in an event and record the audience count. 
 
 ## Application Architecture
+![Application Architecture](/assets/images/app-str.png)
+
 The parts of the application are as follows:
 * Frontend - ReactJS, this repo
 * API - NodeJS, found in this [repo](https://github.com/Z11mm/sca-project-c2-app-api)
@@ -50,6 +52,8 @@ Check out the infrastructure-as-code configuration
 for this project in this [repo](https://github.com/Z11mm/sca-project-c2-iac)
 
 ## Configuration Management with Ansible
+
+![Configure Jenkins](/assets/images/jenkins-config.png)
 
 Install Ansible in one of the two VM instances provisioned with Terraform. Then, install and configure Jenkins for this project using Ansible.
 
