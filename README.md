@@ -72,29 +72,29 @@ To install Ansible, follow these steps:
 * Run the following commands to install Ansible:
 
     * Update Repository by including the official project’s PPA
-    - `sudo apt-get update`
-    - `sudo apt-add-repository -y ppa:ansible/ansible`
-    - `sudo apt-get update` to refresh the package manager
+     `sudo apt-get update`
+     `sudo apt-add-repository -y ppa:ansible/ansible`
+     `sudo apt-get update` to refresh the package manager
 
     * Install Ansible (and Python)
-    - `sudo apt-get install -y ansible`
-    - `sudo apt install python-pip -y`
+     `sudo apt-get install -y ansible`
+     `sudo apt install python-pip -y`
 
     * Install Boto Framework
-    - `sudo pip install boto boto3`
-    - `sudo apt-get install python-boto -y`
+     `sudo pip install boto boto3`
+     `sudo apt-get install python-boto -y`
 
     * Check that Ansible is installed
-    - `ansible --version`
+     `ansible --version`
 
     * Add the ip address of the Jenkins instance within Ansible's inventory file:
-    - `sudo vi /etc/ansible/hosts`
-    - Add this snippet:
-    ```
-    [jenkins-server]
-    <external-ip-address> ansible_ssh_user=<username> ansible_ssh_private_key=path/to/private/key ansible_python_interpreter=path/to/python
-
-    ```
+     `sudo vi /etc/ansible/hosts`
+     Add this snippet within `/etc/ansible/hosts`:
+        ```
+        [jenkins-server]
+        <external-ip-address> ansible_ssh_user=<username> ansible_ssh_private_key=path/to/private/key   ansible_python_interpreter=path/to/python
+    
+        ```
 
 * Install and configure Jenkins
     - Create a directory within the Ansible instance named `playbooks`:
