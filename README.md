@@ -11,6 +11,27 @@ The parts of the application are as follows:
 * API - NodeJS, found in this [repo](https://github.com/Z11mm/sca-project-c2-app-api)
 * Database - PostgreSQL, found [here](https://github.com/Z11mm/sca-project-c2-app-api/tree/main/postgres)
 
+## Deployment Architecture
+![Deployment Architecture](/assets/images/deploy-str.png)
+
+Deploy the frontend and api on GKE while using GCP-managed Cloud SQL database service.
+
+* Frontend deployment (`react_deployment.yml`)
+Deploy the React frontend with a Load Balancer service to make it accessible over the public internet.  
+Configure Nginx as a reverse proxy to direct traffic to the API.
+Enable Zero Downtime Deployment with a rolling update in Kubernetes.
+
+* API deployment (`api_deployment.yml`)
+Deploy the API with a ClusterIP service which will ensure it is not accessible over the internet.
+Enable Zero Downtime Deployment with a rolling update in Kubernetes.
+Create Secrets for database credentials and service accounts for IAM authentication to Cloud SQL.
+
+* Database deployment
+Setup Postgres on Cloud SQL instance.
+Use Cloud SQL Auth Proxy for secure access to Cloud SQL instance without the need for authorized networks or  
+for configuring SSL.
+Setup Cloud SQL Auth Proxy as a 'sidecar', to run as a container within the pod running the API container. 
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -111,12 +132,13 @@ To install Ansible, follow these steps:
         - Node
         - Google Kubernetes Engine
         - Docker
-
+        - Slack Notifications
 ## Continuous Integration (CI pipeline)  
 A push to the repository triggers the CI/CD script in the Jenkinsfile. The CI portion of the script does the following:
 * Runs `npm run build` to create a build folder.
 * Builds a Docker image using the `docker-compose-prod.yml` file.
 * Pushes the Docker image to DockerHub with a tag version corresponding to the build id.
+* Sends Slack notifications when build starts and if build is successful or build fails.
 
 
 ## Continuous Deployment (CD pipeline)
@@ -124,3 +146,4 @@ A push to the repository triggers the CI/CD script in the Jenkinsfile. The CD po
 * Pulls the Docker image from DockerHub.
 * Replaces the `:latest` tag version within the deployment file with the updated build id.
 * Deploys the application to Google Kubernetes Engine(GKE) using the Jenkins GKE plugin.
+* Sends Slack notifications when build starts and if build is successful or build fails.

@@ -63,7 +63,6 @@ pipeline {
       steps {
         echo 'Deploying to GKE'
         sh 'ls -ltr'
-        // sh "sed -i 's/masterziii/sca-project-frontend:latest/masterziii/sca-project-frontend:${env.BUILD_ID}/g' react_deployment.yml"
         sh "sed -i 's/latest/$BUILD_ID/g' react_deployment.yml"
         step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'react_deployment.yml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
       
