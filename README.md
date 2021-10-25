@@ -19,6 +19,8 @@ In the project directory, you can run:
 
 Runs the app in the development mode.  
 Open [http://localhost:3000](http://localhost:3000) or the next available port to view it in the browser.
+For containers, run `docker-compose -f docker-compose-dev.yml up --build` in development mode.
+In production mode, run `docker-compose -f docker-compose-dev.yml build` to create production-ready image.
 
 The page will reload if you make edits.  
 You will also see any lint errors in the console.
@@ -93,13 +95,14 @@ To install Ansible, follow these steps:
         ```
         [jenkins-server]
         <external-ip-address> ansible_ssh_user=<username> ansible_ssh_private_key=path/to/private/key   ansible_python_interpreter=path/to/python
-    
+
         ```
 
 * Install and configure Jenkins
-    - Create a directory within the Ansible instance named `playbooks`:
+    - Create a directory within the Ansible instance named `playbooks`:  
         `mkdir playbooks`
-    - Within the `playbooks` directory, create the playbooks found in this [repo](https://github.com/Z11mm/     ansible-playbooks)
+    - Within the `playbooks` directory, create playbooks. Playbooks for this project can be found in this 
+[repo](https://github.com/Z11mm/ansible-playbooks)
     - Run the playbooks, one at a time using this command:
         `sudo ansible-playbook <filename>`
     - Install Java first, followed by Jenkins, and then the others in any order.
