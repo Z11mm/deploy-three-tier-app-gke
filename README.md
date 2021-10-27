@@ -133,10 +133,13 @@ The CD portion of the script does the following:
 
 ## Monitoring
 
-Monitor your application running in GKE through the built-in Cloud Operations for GKE which has Cloud Monitoring and Logging by default. <br>
+Monitor the application running in GKE through the built-in Cloud Operations for GKE which has Cloud Monitoring and Logging by default. <br>
 
 * Set up a Monitoring Dashboard for GKE
+
 ![Monitoring Dashboard for GKE](/assets/images/gke-dashboard.png)
 
 * Set up an alerting policy to get notifications, with Slack as the notification channel
+
 ![Alerting policy](/assets/images/alerting-policy.png)
+![Alerting policy](/assets/images/IMG_0172.PNG)
