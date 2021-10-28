@@ -22,10 +22,32 @@ Tachyons, react-components and css are used for styling.
 Deploy the frontend and api on the same GKE cluster while using GCP-managed Cloud SQL database service.
 
 * Frontend deployment
-    * The deployment file `react_deployment.yml` contains the Kubernetes objects required for this application. The API key is defined in the Secrets file.
+    * The deployment file `react_deployment.yml` contains the Kubernetes objects required for this application. The API key is defined in the Secrets file. <br>
+
     * Deploy the React frontend with a Load Balancer service to make it accessible over the public internet.  
+
     * Configure Nginx as a reverse proxy to direct traffic to the API.
-    * Enable Zero Downtime Deployment with a rolling update in Kubernetes.
+
+    * Enable Zero Downtime Deployment with a rolling update strategy in Kubernetes. <br>
+
+* API deployment <br>
+
+    * Create Secrets for database credentials and service accounts for IAM authentication to Cloud SQL. <br>
+
+    * Deploy the API with a ClusterIP service which will ensure it is not accessible over the internet. <br>
+
+    * The `service-acc-key.yml` file is the service account credentials required for the GKE cluster to access the Cloud SQL database. Deploy this file before `api_deployment.yml`<br>
+
+    * The `api_deployment.yml` deployment file contains the Kubernetes objects- Secrets, Service and Deployment - required for this application for easy readability. The order of deployment is Secrets, Service and then Deployment. <br>   
+
+    * Enable Zero Downtime Deployment with a rolling update strategy in Kubernetes. <br>
+
+
+* Database deployment
+    * Setup Postgres on Cloud SQL instance.
+    * Use Cloud SQL Auth Proxy for secure access to Cloud SQL instance without the need for authorized networks or  
+    or configuring SSL.
+    * Setup Cloud SQL Auth Proxy as a 'sidecar', to run as a container within the pod running the API container. Mount service account secret as a volume on Cloud SQL Auth Proxy container.
 
 ## Available Scripts
 
