@@ -101,6 +101,7 @@ To install Ansible, follow these steps:
 
     * Update Repository by including the official project’s PPA <br>
      `sudo apt-get update` <br>
+     `sudo apt-get install software-properties-common`
      `sudo apt-add-repository -y ppa:ansible/ansible` <br>
      `sudo apt-get update` to refresh the package manager <br>
 

@@ -15,6 +15,8 @@ import Attendance from "./components/attendance/Attendance";
 import "./App.css";
 
 const { REACT_APP_API_URL } = process.env;
+
+// Manage state within React
 const initialState = {
   input: "",
   imageUrl: "",
@@ -46,6 +48,7 @@ class App extends Component {
     this.state = initialState;
   }
 
+  // Update state with user details
   createUser = (data) => {
     this.setState((prevState) => ({
       user: {
@@ -59,6 +62,7 @@ class App extends Component {
     }));
   };
 
+  // Update state with meeting details
   createMeeting = (data) => {
     this.setState((prevState) => ({
       meeting: {
@@ -110,20 +114,20 @@ class App extends Component {
     })
       .then((response) => response.json())
       .then((response) => {
-        if (response) {
-          fetch(`${REACT_APP_API_URL}/image`, {
-            method: "put",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              id: this.state.user.id,
-            }),
-          })
-            .then((response) => response.json())
-            .then((count) => {
-              this.setState(Object.assign(this.state.user, { entries: count }));
-            })
-            .catch((err) => console.log(err));
-        }
+        // if (response) {
+        //   fetch(`${REACT_APP_API_URL}/image`, {
+        //     method: "put",
+        //     headers: { "Content-Type": "application/json" },
+        //     body: JSON.stringify({
+        //       id: this.state.user.id,
+        //     }),
+        //   })
+        //     .then((response) => response.json())
+        //     .then((count) => {
+        //       this.setState(Object.assign(this.state.user, { entries: count }));
+        //     })
+        //     .catch((err) => console.log(err));
+        // }
         this.setBoundingBoxes(this.calculateFaceRegions(response));
       })
       .catch((err) => console.log(err));
