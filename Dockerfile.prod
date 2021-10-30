@@ -1,5 +1,7 @@
 # syntax=docker/dockerfile:1
 
+# Dockerfile for production
+
 FROM nginx:1.21.3-alpine
 
 COPY ./build /usr/share/nginx/html
