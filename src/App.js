@@ -9,8 +9,10 @@ import Rank from "./components/rank/Rank";
 import FacialRecognition from "./components/facial-recognition/FaceRecognition";
 import ProfileModal from "./components/modal/ProfileModal";
 import AttendanceModal from "./components/modal/AttendanceModal";
+import RecordsModal from "./components/modal/RecordsModal";
 import Profile from "./components/profile/Profile";
 import Attendance from "./components/attendance/Attendance";
+import Records from "./components/records/Records";
 
 import "./App.css";
 
@@ -25,6 +27,7 @@ const initialState = {
   isSignedIn: false,
   isProfileOpen: false,
   isAttendanceOpen: false,
+  isRecordsOpen: false,
   user: {
     id: "",
     name: "",
@@ -157,6 +160,13 @@ class App extends Component {
       isAttendanceOpen: !prevState.isAttendanceOpen,
     }));
   };
+  // Turn records modal on or off
+  toggleRecordsModal = () => {
+    this.setState((prevState) => ({
+      ...prevState,
+      isRecordsOpen: !prevState.isRecordsOpen,
+    }));
+  };
 
   render() {
     const {
@@ -166,6 +176,7 @@ class App extends Component {
       imageUrl,
       isProfileOpen,
       isAttendanceOpen,
+      isRecordsOpen,
       user,
       meeting,
     } = this.state;
@@ -176,6 +187,7 @@ class App extends Component {
           onRouteChange={this.handleRouteChange}
           toggleModal={this.toggleModal}
           toggleAttendanceModal={this.toggleAttendanceModal}
+          toggleRecordsModal={this.toggleRecordsModal}
         />
         {isProfileOpen ? (
           <ProfileModal>
@@ -202,6 +214,12 @@ class App extends Component {
               apiUrl={REACT_APP_API_URL}
             />
           </AttendanceModal>
+        ) : null}
+
+        {isRecordsOpen ? (
+          <RecordsModal>
+            <Records isRecordsOpen={isRecordsOpen} toggleRecordsModal={this.toggleRecordsModal} />
+          </RecordsModal>
         ) : null}
 
         {route === "home" ? (
