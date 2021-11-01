@@ -37,7 +37,9 @@ const initialState = {
     department: "",
     title: "",
   },
+  meetings: [],
   meeting: {
+    id: "",
     event_name: "",
     location: "",
     no_of_people: "",
@@ -66,15 +68,9 @@ class App extends Component {
   };
 
   // Update state with meeting details
-  createMeeting = (data) => {
-    this.setState((prevState) => ({
-      meeting: {
-        ...prevState.user,
-        event_name: data.event_name,
-        location: data.location,
-        no_of_people: data.no_of_people,
-      },
-    }));
+  getMeetings = (meetings) => {
+    this.setState({ meetings });
+    // console.log(meetings)
   };
 
   calculateFaceRegions = (data) => {
@@ -117,20 +113,6 @@ class App extends Component {
     })
       .then((response) => response.json())
       .then((response) => {
-        // if (response) {
-        //   fetch(`${REACT_APP_API_URL}/image`, {
-        //     method: "put",
-        //     headers: { "Content-Type": "application/json" },
-        //     body: JSON.stringify({
-        //       id: this.state.user.id,
-        //     }),
-        //   })
-        //     .then((response) => response.json())
-        //     .then((count) => {
-        //       this.setState(Object.assign(this.state.user, { entries: count }));
-        //     })
-        //     .catch((err) => console.log(err));
-        // }
         this.setBoundingBoxes(this.calculateFaceRegions(response));
       })
       .catch((err) => console.log(err));
@@ -178,7 +160,7 @@ class App extends Component {
       isAttendanceOpen,
       isRecordsOpen,
       user,
-      meeting,
+      meetings,
     } = this.state;
     return (
       <div>
@@ -209,7 +191,7 @@ class App extends Component {
               toggleAttendanceModal={this.toggleAttendanceModal}
               createMeeting={this.createMeeting}
               user={user}
-              meeting={meeting}
+              meetings={meetings}
               boxes={boxes}
               apiUrl={REACT_APP_API_URL}
             />
@@ -218,7 +200,14 @@ class App extends Component {
 
         {isRecordsOpen ? (
           <RecordsModal>
-            <Records isRecordsOpen={isRecordsOpen} toggleRecordsModal={this.toggleRecordsModal} />
+            <Records
+              isRecordsOpen={isRecordsOpen}
+              toggleRecordsModal={this.toggleRecordsModal}
+              user={user}
+              getMeetings={this.getMeetings}
+              meetings={meetings}
+              apiUrl={REACT_APP_API_URL}
+            />
           </RecordsModal>
         ) : null}
 

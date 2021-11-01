@@ -38,7 +38,7 @@ class Attendance extends Component {
     })
       .then((resp) => {
         this.props.toggleAttendanceModal();
-        this.props.createMeeting({ ...this.props.meeting, ...data });
+        this.props.createMeeting({ ...this.props.meetings, ...data });
       })
       .catch((err) => console.log(err));
   };

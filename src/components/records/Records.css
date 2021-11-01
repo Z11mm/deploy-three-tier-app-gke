@@ -1,22 +1,36 @@
 .records-modal {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255);
   position: fixed;
   height: 100%;
   width: 100%;
   top: 0;
   left: 0;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center; */
+  justify-content: right;
+  padding: 1rem;
 }
 
-.modal-close {
+.records-close {
   font-size: 3rem;
   font-style: bold;
   cursor: pointer;
 }
 
-.modal-close:hover {
+.records-close:hover {
   color: gray;
   cursor: pointer;
+}
+
+.table {
+
+  margin-top: 5rem;
+  position: fixed;
+  top: 0;
+  left: 0; 
+}
+
+.welcome {
+    position: relative;
+    margin-right: 50%;
 }
