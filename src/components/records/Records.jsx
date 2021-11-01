@@ -6,6 +6,7 @@ import "./Records.css";
 
 class Records extends Component {
 
+    // Populate records onClick "View Records"
   componentDidMount() {
     fetch(`${this.props.apiUrl}/profile/${this.props.user.id}/meeting`, {
       method: "get",
@@ -16,22 +17,6 @@ class Records extends Component {
       })
       .catch((err) => console.log(err));
   }
-
-//     onDeleteRecord = () => {
-//     fetch(`${this.props.apiUrl}/meeting/${this.props.meeting.id}`, {
-//       method: "delete",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//     })
-//       .then((resp) => resp.json())
-//       .then((resp) => {
-//         console.log(resp[0].id);
-//         // this.props.deleteMeeting(resp[0].id);
-//       })
-//       .catch((err) => console.log(err));
-//   };
-
 
   render() {
     const { toggleRecordsModal, meetings, user, apiUrl, deleteMeeting } =
@@ -52,7 +37,6 @@ class Records extends Component {
             <tbody>
               {meetings.map((meeting) => (
                 <Record
-                //   onDeleteRecord={this.onDeleteRecord}
                   meeting={meeting}
                   user={user}
                   apiUrl={apiUrl}
