@@ -67,11 +67,25 @@ class App extends Component {
     }));
   };
 
+  createMeeting = (data) => {
+    this.setState((prevState) => ({
+      meetings: [...prevState.meetings, data]
+    }));
+  };
+
   // Update state with meeting details
   getMeetings = (meetings) => {
     this.setState({ meetings });
-    // console.log(meetings)
   };
+
+  deleteMeeting = (id) => {
+    // copy current list of meetings
+    const meetings = [...this.state.meetings];
+
+    // filter out item being deleted
+    const updatedMeetingsList = meetings.filter((meeting) => meeting.id !== id);
+    this.setState({ meetings: updatedMeetingsList });
+  }
 
   calculateFaceRegions = (data) => {
     return data.outputs[0].data.regions.map((face) => {
@@ -207,6 +221,7 @@ class App extends Component {
               getMeetings={this.getMeetings}
               meetings={meetings}
               apiUrl={REACT_APP_API_URL}
+              deleteMeeting={this.deleteMeeting}
             />
           </RecordsModal>
         ) : null}
