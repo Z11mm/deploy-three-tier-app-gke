@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './ProfileIcon.css';
 import {
   Dropdown,
   DropdownToggle,
@@ -36,9 +37,9 @@ const ProfileIcon = ({
           right
           className="b--transparent shadow-5"
           style={{
-            // marginTop: "10px",
+            transform: "translate3d(-72px, 80px, 0px)",
             marginRight: "40px",
-            backgroundColor: "rgba(255, 255, 255, 0.5",
+            backgroundColor: "rgba(255, 255, 255, 0.5)",
           }}
         >
           <DropdownItem onClick={() => toggleRecordsModal()}>
