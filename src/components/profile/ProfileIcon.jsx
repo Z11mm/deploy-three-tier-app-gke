@@ -6,7 +6,12 @@ import {
   DropdownItem,
 } from "reactstrap";
 
-const ProfileIcon = ({ onRouteChange, toggleModal, toggleAttendanceModal, toggleRecordsModal }) => {
+const ProfileIcon = ({
+  onRouteChange,
+  toggleModal,
+  toggleAttendanceModal,
+  toggleRecordsModal,
+}) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggle = () => setDropdownOpen((prevState) => !prevState);
@@ -27,17 +32,23 @@ const ProfileIcon = ({ onRouteChange, toggleModal, toggleAttendanceModal, toggle
             />
           </div>
         </DropdownToggle>
-              <DropdownMenu
-                  right
+        <DropdownMenu
+          left
           className="b--transparent shadow-5"
           style={{
             marginTop: "20px",
             backgroundColor: "rgba(255, 255, 255, 0.5",
           }}
         >
-          <DropdownItem onClick={() => toggleRecordsModal()}>View Records</DropdownItem>
-          <DropdownItem onClick={() => toggleAttendanceModal()}>Save Attendance</DropdownItem>
-          <DropdownItem onClick={() => toggleModal()}>Update Profile</DropdownItem>
+          <DropdownItem onClick={() => toggleRecordsModal()}>
+            View Records
+          </DropdownItem>
+          <DropdownItem onClick={() => toggleAttendanceModal()}>
+            Save Attendance
+          </DropdownItem>
+          <DropdownItem onClick={() => toggleModal()}>
+            Update Profile
+          </DropdownItem>
           <DropdownItem onClick={() => onRouteChange("signout")}>
             Sign Out
           </DropdownItem>
