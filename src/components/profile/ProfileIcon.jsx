@@ -33,7 +33,7 @@ const ProfileIcon = ({
           </div>
         </DropdownToggle>
         <DropdownMenu
-          left
+          start
           className="b--transparent shadow-5"
           style={{
             marginTop: "20px",
