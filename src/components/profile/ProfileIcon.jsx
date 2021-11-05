@@ -36,7 +36,7 @@ const ProfileIcon = ({
           right
           className="b--transparent shadow-5"
           style={{
-            marginTop: "10px",
+            // marginTop: "10px",
             marginRight: "40px",
             backgroundColor: "rgba(255, 255, 255, 0.5",
           }}
