@@ -1,7 +1,6 @@
 # Project: Deploy a Three-Tier application to The Cloud
 
 ## Introduction
-This is my final project for the She Code Africa Cloud School(Cohort 2). <br>
 
 This application is a face-detection app based off of the AI/ML [Clarifai API](https://www.clarifai.com/models/ai-face-detection). The application allows users to upload images of audiences in an event and record the audience count. 
 
