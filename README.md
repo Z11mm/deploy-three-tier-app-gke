@@ -17,7 +17,7 @@ The `/src` directory contains the React components and css styles for the projec
 Tachyons, react-components and css are used for styling.
 
 ## Deployment Architecture
-![Deployment Architecture](/assets/images/deploy-str.png)
+![Deployment Architecture](/assets/images/gke-system-diagram.png)
 
 Deploy the frontend and api on the same GKE cluster while using GCP-managed Cloud SQL database service.
 
